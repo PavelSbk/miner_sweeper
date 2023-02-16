@@ -38,7 +38,14 @@ public class JavaSweeper extends JFrame {
     private void initPanel() {
         int width = COLUMNS * IMAGE_SIZE;
         int height = ROWS * IMAGE_SIZE;
-        panel = new JPanel();
+        panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(getIcon("bomb"), 0, 0, this);
+                g.drawImage(getIcon("bombed"), IMAGE_SIZE, 0, this);
+            }
+        };
         panel.setPreferredSize(new Dimension(width, height));
         add(panel);
     }
@@ -51,16 +58,13 @@ public class JavaSweeper extends JFrame {
         setVisible(true);
     }
 
-    private Image getImage(String name) {
-        String filename = "img/" + name.toLowerCase() + ".png";
-        /**
-         * Mark directory as resources root
-         * then new ImageIcon(getClass().getResource(filename));
-         * or
-         * getClass().getResource(filename) with null validation
-         */
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(filename)));
-        return icon.getImage();
+    /**
+     * Marking res/ directory as resources root is important
+     */
+    private Image getIcon(String name) {
+        return new ImageIcon(Objects.
+                requireNonNull(getClass().getResource("/img/" + name + ".png")))
+                .getImage();
     }
 
     public static void main(String[] args) {
