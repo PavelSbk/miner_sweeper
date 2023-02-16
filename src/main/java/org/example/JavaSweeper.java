@@ -25,6 +25,9 @@ import java.awt.*;
 public class JavaSweeper extends JFrame {
 
     private JPanel panel;
+    private final int COLUMNS = 15;
+    private final int ROWS = 1;
+    private final int IMAGE_SIZE = 50;
 
     private JavaSweeper() throws HeadlessException {
         initPanel();
@@ -32,8 +35,10 @@ public class JavaSweeper extends JFrame {
     }
 
     private void initPanel() {
+        int width = COLUMNS * IMAGE_SIZE;
+        int height = ROWS * IMAGE_SIZE;
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(500, 500));
+        panel.setPreferredSize(new Dimension(width, height));
         add(panel);
     }
 
