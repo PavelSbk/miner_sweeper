@@ -2,6 +2,7 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * JFrame:
@@ -48,7 +49,18 @@ public class JavaSweeper extends JFrame {
         setTitle("Sweeper");
         setLocationRelativeTo(null);
         setVisible(true);
+    }
 
+    private Image getImage(String name) {
+        String filename = "img/" + name.toLowerCase() + ".png";
+        /**
+         * Mark directory as resources root
+         * then new ImageIcon(getClass().getResource(filename));
+         * or
+         * getClass().getResource(filename) with null validation
+         */
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(filename)));
+        return icon.getImage();
     }
 
     public static void main(String[] args) {
